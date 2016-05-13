@@ -34,34 +34,29 @@ public class SkyView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
 
+        float radius = 100;
         Paint p = new Paint();
         // smooths
         p.setAntiAlias(true);
         int xPos = (canvas.getWidth() / 2);
         int yPos = (int) ((canvas.getHeight() / 2) - ((p.descent() + p.ascent()) / 2)) - 300;
 
-        //sun
-        p.setColor(Color.YELLOW);
-        p.setStyle(Paint.Style.FILL);
-        p.setStrokeWidth(4.5f);
-        // opacity
-        //p.setAlpha(0x80); //
-        canvas.drawCircle(xPos - 200, yPos, 60, p);
+        DrawSun(canvas, radius, p, yPos, Color.YELLOW, xPos - 200);
 
-        //moon
-        p.setColor(Color.BLACK);
-        p.setStyle(Paint.Style.FILL);
-        p.setStrokeWidth(4.5f);
-        // opacity
-        //p.setAlpha(0x80); //
-        canvas.drawCircle(xPos + 200, yPos, 60, p);
-
-        p.setColor(Color.WHITE);
-        p.setStyle(Paint.Style.FILL);
-        p.setStrokeWidth(4.5f);
-        // opacity
-        // p.setAlpha(0x80); //
-        canvas.drawCircle(xPos + 250, yPos, 60, p);
+        DrawMoon(canvas, radius, p, xPos, yPos);
     }
+
+    private void DrawSun(Canvas canvas, float radius, Paint p, int yPos, int yellow, int cx) {
+        p.setColor(yellow);
+        p.setStyle(Paint.Style.FILL);
+        p.setStrokeWidth(4.5f);
+        canvas.drawCircle(cx, yPos, radius, p);
+    }
+
+    private void DrawMoon(Canvas canvas, float radius, Paint p, int xPos, int yPos) {
+        DrawSun(canvas, radius, p, yPos, Color.BLACK, xPos + 200);
+        DrawSun(canvas, radius, p, yPos, Color.WHITE, xPos + 250);
+    }
+
 
 }
