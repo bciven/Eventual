@@ -56,6 +56,7 @@ public class FacebookLoginActivity extends AppCompatActivity {
             public void onSuccess(LoginResult loginResult) {
 
                 Intent intent = new Intent(getApplicationContext(),QuizActivity.class);
+                intent.putExtra("accessToken",AccessToken.getCurrentAccessToken());
                 startActivity(intent);
             }
 

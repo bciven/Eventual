@@ -62,6 +62,9 @@ public class QuizActivity extends AppCompatActivity {
 
      // test
 
+            VolleyClass volleyClass = new VolleyClass(getApplicationContext(),getIntent().getStringExtra("accessToken"),"3");
+            volleyClass.volleyRun();
+
             Event event1 = new Event();
             Event event2 = new Event();
 

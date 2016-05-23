@@ -2,6 +2,7 @@ package com.social.eventual;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -48,7 +49,7 @@ public class VolleyClass {
 
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = "http://10.0.0.59:8080/webservice/info/all?accessToken="+this.accessToken+""+"&page="+this.page;
+        String url = "127.0.0.1:8080/EventualServer/"+this.page+"/"+this.accessToken;
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -68,6 +69,7 @@ public class VolleyClass {
                         try {
                             jso = ja.getJSONObject(0);
                             Log.d(" response ", jso.getString("response"));
+                            Toast.makeText(context,jso.getString("response"),Toast.LENGTH_LONG);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
