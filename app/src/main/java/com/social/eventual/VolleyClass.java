@@ -59,7 +59,7 @@ public class VolleyClass {
                         // Display the first 500 characters of the response string.
                         //   mTextView.setText("Response is: " + response.substring(0, 500));
                         JSONObject jso;
-
+                        Toast.makeText(context,"connected to server.....",Toast.LENGTH_LONG);
                         JSONArray ja = null;
                         try {
                             ja = new JSONArray(response);
