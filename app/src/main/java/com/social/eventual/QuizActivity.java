@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+
+import com.facebook.AccessToken;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +26,7 @@ public class QuizActivity extends AppCompatActivity {
         this.activity = this;
 
       //  InitQuestions();
+
 
         new LoadList().execute();
     }
@@ -62,7 +66,8 @@ public class QuizActivity extends AppCompatActivity {
 
      // test
 
-            VolleyClass volleyClass = new VolleyClass(getApplicationContext(),getIntent().getStringExtra("accessToken"),"3");
+
+            VolleyClass volleyClass = new VolleyClass(getApplicationContext(),AccessToken.getCurrentAccessToken().toString(),"3");
             volleyClass.volleyRun();
 
             Event event1 = new Event();

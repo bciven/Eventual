@@ -57,6 +57,7 @@ public class FacebookLoginActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(getApplicationContext(),QuizActivity.class);
                 intent.putExtra("accessToken",AccessToken.getCurrentAccessToken());
+                Log.d("hahaaaaaaaaa","yyyyy"+AccessToken.getCurrentAccessToken());
                 startActivity(intent);
             }
 
@@ -134,15 +135,18 @@ public class FacebookLoginActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
         if(isFacebookLoggedIn())
         {
             Log.d("Login Status ::::::"," Already Logged In");
             Intent intent = new Intent(getApplicationContext(),QuizActivity.class);
+
             startActivity(intent);
         }
     }
 
     public boolean isFacebookLoggedIn(){
+
         return AccessToken.getCurrentAccessToken() != null;
     }
 }
