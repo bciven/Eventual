@@ -50,7 +50,7 @@ public class VolleyClass {
 
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = "127.0.0.1:8080/EventualServer/"+this.page+"/"+this.accessToken;
+        String url = "http://172.30.29.210:8080/EventualServer/service/events/"+this.page+"/"+this.accessToken;
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
