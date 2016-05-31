@@ -1,14 +1,20 @@
 package com.social.eventual;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
+import android.content.pm.PackageInstaller;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+
 import com.facebook.AccessToken;
+import com.facebook.login.LoginManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +31,14 @@ public class QuizActivity extends AppCompatActivity {
 
         this.activity = this;
 
+        Button logoutbtn = (Button) findViewById(R.id.logoutbtn);
+        logoutbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoginManager.getInstance().logOut();
+                Log.d(" logout :::: ", "successful");
+            }
+        });
       //  InitQuestions();
 
 
@@ -67,7 +81,12 @@ public class QuizActivity extends AppCompatActivity {
      // test
 
 
-            VolleyClass volleyClass = new VolleyClass(getApplicationContext(),AccessToken.getCurrentAccessToken().toString(),"3");
+            SharedPreferences shr = getSharedPreferences("acc",MODE_PRIVATE);
+
+
+
+           Log.d("AccessTokennnnn::", shr.getString("token",null)+"ss");
+           VolleyClass volleyClass = new VolleyClass(getApplicationContext(), shr.getString("token",null),"3");
             volleyClass.volleyRun();
 
             Event event1 = new Event();

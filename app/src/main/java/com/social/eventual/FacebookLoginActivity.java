@@ -3,6 +3,7 @@ package com.social.eventual;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
@@ -56,8 +57,11 @@ public class FacebookLoginActivity extends AppCompatActivity {
             public void onSuccess(LoginResult loginResult) {
 
                 Intent intent = new Intent(getApplicationContext(),QuizActivity.class);
-                intent.putExtra("accessToken",AccessToken.getCurrentAccessToken());
-                Log.d("hahaaaaaaaaa","yyyyy"+AccessToken.getCurrentAccessToken());
+
+                SharedPreferences.Editor editor = getSharedPreferences("acc",MODE_PRIVATE).edit();
+                editor.putString("token",loginResult.getAccessToken().getToken());
+                editor.commit();
+                Log.d("Token :: ",loginResult.getAccessToken().getToken());
                 startActivity(intent);
             }
 
@@ -135,6 +139,8 @@ public class FacebookLoginActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        AccessToken.refreshCurrentAccessTokenAsync();
 
         if(isFacebookLoggedIn())
         {
