@@ -1,6 +1,7 @@
 package com.social.eventual;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInstaller;
 import android.os.AsyncTask;
@@ -36,6 +37,8 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 LoginManager.getInstance().logOut();
+                Intent login = new Intent(v.getContext(), FacebookLoginActivity.class); /** Class name here */
+                startActivityForResult(login, 0);
                 Log.d(" logout :::: ", "successful");
             }
         });
