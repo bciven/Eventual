@@ -52,7 +52,10 @@ public class FacebookLoginActivity extends AppCompatActivity {
 
         // Create the callbackManager and add functionality to it.
         callbackManager = CallbackManager.Factory.create();
-        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+        LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton.setReadPermissions("user_likes");
+
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
 
@@ -62,6 +65,8 @@ public class FacebookLoginActivity extends AppCompatActivity {
                 editor.putString("token",loginResult.getAccessToken().getToken());
                 editor.commit();
                 Log.d("Token :: ",loginResult.getAccessToken().getToken());
+                Log.d("access :: ",loginResult.getAccessToken().toString());
+                Log.d("access1 :: ",AccessToken.getCurrentAccessToken().toString());
                 startActivity(intent);
             }
 
@@ -81,14 +86,14 @@ public class FacebookLoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         thisActivity = this;
+        // Set the current layout to main.
 
         // Initialize Facebook SDK.
         FacebookSdk.sdkInitialize(getApplicationContext());
-
+        setContentView(R.layout.activity_login);
         setupFacebookLogin();
 
-        // Set the current layout to main.
-        setContentView(R.layout.activity_login);
+
     }
 
     @Nullable
@@ -96,6 +101,7 @@ public class FacebookLoginActivity extends AppCompatActivity {
     public View onCreateView(String name, Context context, AttributeSet attrs) {
         return super.onCreateView(name, context, attrs);
     }
+
 /*
     @Override
     protected void onResume() {
